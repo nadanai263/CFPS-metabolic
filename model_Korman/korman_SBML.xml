@@ -551,12 +551,12 @@
       </reaction>
       <reaction id="_J6" reversible="true" fast="false">
         <listOfReactants>
-          <speciesReference species="gap" stoichiometry="3" constant="true"/>
-          <speciesReference species="ppi" stoichiometry="3" constant="true"/>
+          <speciesReference species="gap" stoichiometry="1" constant="true"/>
+          <speciesReference species="ppi" stoichiometry="1" constant="true"/>
           <speciesReference species="nad" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <listOfProducts>
-          <speciesReference species="bpg" stoichiometry="3" constant="true"/>
+          <speciesReference species="bpg" stoichiometry="1" constant="true"/>
           <speciesReference species="nadh" stoichiometry="1" constant="true"/>
         </listOfProducts>
         <kineticLaw>
@@ -658,12 +658,12 @@
       </reaction>
       <reaction id="_J7" reversible="true" fast="false">
         <listOfReactants>
-          <speciesReference species="gap" stoichiometry="3" constant="true"/>
-          <speciesReference species="ppi" stoichiometry="3" constant="true"/>
+          <speciesReference species="gap" stoichiometry="2" constant="true"/>
+          <speciesReference species="ppi" stoichiometry="2" constant="true"/>
           <speciesReference species="nadp" stoichiometry="2" constant="true"/>
         </listOfReactants>
         <listOfProducts>
-          <speciesReference species="bpg" stoichiometry="3" constant="true"/>
+          <speciesReference species="bpg" stoichiometry="2" constant="true"/>
           <speciesReference species="nadph" stoichiometry="2" constant="true"/>
         </listOfProducts>
         <kineticLaw>

@@ -1,0 +1,43 @@
+// libAntimony v2.9.4
+// Compartments and Species:
+species  atp, adp, nad, nadh, ppi, pppi, pep, pyr
+
+// Reactions:
+ 
+_J11: 3 pep + 3 adp -> 3 pyr + 3 atp; VmaxPyk * (pep*adp - pyr*atp/Keq11)/(Kadp11*Kpep11) * 1/((1+adp/Kadp11)*(1+pep/Kpep11)+(1+atp/Katp11)*(1+pyr/Kpyr11)-1);
+_J22: 2 pppi -> 4 ppi; VmaxPpase * (pppi - ppi*ppi/Keq22)/Kpppi22 * 1/((1+pppi/Kpppi22)+(1+ppi/Kppi22)*(1+ppi/Kppi22)-1); 
+_J23: 4 nadh -> 4 nad; VmaxNoxe * nadh/(Knadh23+nadh);
+_J24: atp -> adp + ppi; Vmax*atp;
+
+// Species initializations
+atp = 4.0;
+adp = 0.0;
+nad = 0.25;
+nadh = 0.0;
+ppi = 25.0;
+pppi = 0.0;
+pep = 0.0;
+pyr = 0.0;
+
+// Parameter initializations:
+
+
+// R11
+VmaxPyk = 1.0;
+Kadp11 = 0.3; 
+Kpep11 = 0.3;
+Katp11 = 1.0;
+Kpyr11 = 1.0;
+Keq11 = 5000.0;
+
+// R22
+VmaxPpase = 20.0;
+Kpppi22 = 0.1;
+Kppi22 = 0.1;
+Keq22 = 10.0;
+
+// R23
+VmaxNoxe = 1.0;
+Knadh23 = 0.1;
+
+Vmax= 1.0;

@@ -8,8 +8,8 @@ _J2: 1.5 g6p -> 1.5 f6p; VmaxPgi * (g6p - f6p/Keq2)/(Kg6p2) * 1/((1+g6p/Kg6p2)+(
 _J3: 1.5 f6p + 1.5 atp -> 1.5 fbp + 1.5 adp; VmaxPfk * (f6p*atp - fbp*adp/Keq3)/(Katp3*Kf6p3) * 1/((1+atp/Katp3)*(1+f6p/Kf6p3)+(1+adp/Kadp3)*(1+fbp/Kfbp3)-1);
 _J4: 1.5 fbp -> 1.5 gap + 1.5 dhap; VmaxFba * (fbp - gap*dhap/Keq4)/(Kfbp4) * 1/((1+fbp/Kfbp4)+(1+dhap/Kdhap4)*(1+gap/Kgap4)-1);
 _J5: 1.5 dhap -> 1.5 gap; VmaxTpi * (dhap - gap/Keq5)/Kdhap5 * 1/((1+dhap/Kdhap5)+(1+gap/Kgap5)-1); 
-_J6: 3 gap + 3 ppi + nad -> 3 bpg + nadh; VmaxGap * (gap*nad*ppi - bpg*nadh/Keq6)/(Kgap6*Knad6*Kppi6) * 1/((1+gap/Kgap6)*(1+nad/Knad6)*(1+ppi/Kppi6)+(bpg/Kbpg6)*(1+nadh/Knadh6)-1);
-_J7: 3 gap + 3 ppi + 2 nadp -> 3 bpg + 2 nadph; VmaxmGap * (gap*nadp*ppi - bpg*nadph/Keq7)/(Kgap7*Knadp7*Kppi7) * 1/((1+gap/Kgap7)*(1+nadp/Knadp7)*(1+ppi/Kppi7)+(bpg/Kbpg7)*(1+nadph/Knadph7)-1); 
+_J6: gap + ppi + nad -> bpg + nadh; VmaxGap * (gap*nad*ppi - bpg*nadh/Keq6)/(Kgap6*Knad6*Kppi6) * 1/((1+gap/Kgap6)*(1+nad/Knad6)*(1+ppi/Kppi6)+(bpg/Kbpg6)*(1+nadh/Knadh6)-1);
+_J7: 2 gap + 2 ppi + 2 nadp -> 2 bpg + 2 nadph; VmaxmGap * (gap*nadp*ppi - bpg*nadph/Keq7)/(Kgap7*Knadp7*Kppi7) * 1/((1+gap/Kgap7)*(1+nadp/Knadp7)*(1+ppi/Kppi7)+(bpg/Kbpg7)*(1+nadph/Knadph7)-1); 
 _J8: 3 bpg + 3 adp -> 3 p3g + 3 atp; VmaxPgk * (bpg*adp - p3g*atp/Keq8)/(Kbpg8*Kadp8) * 1/((1+bpg/Kbpg8)*(1+adp/Kadp8)+(1+p3g/Kp3g8)*(1+atp/Katp8)-1); 
 _J9: 3 p3g -> 3 p2g; VmaxPgm * (p3g - p2g/Keq9)/Kp3g9 * 1/((1+p3g/Kp3g9)+(1+p2g/Kp2g9)-1); 
 _J10: 3 p2g -> 3 pep; VmaxEno * (p2g - pep/Keq10)/Kp2g10 * 1/((1+p2g/Kp2g10)+(1+pep/Kpep10)-1);
