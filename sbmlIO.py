@@ -1,5 +1,7 @@
 # 2020 Nadanai Laohakunakorn
 # Adapted from tellurium.py
+# 21/1/21 updated to include coefficients with greater than one significant digit
+# but stoichiometric coeffs cannot have more than one decimal place.
 
 from __future__ import print_function, division, absolute_import
 
@@ -271,9 +273,18 @@ def parseODEs(r,odes):
         # and coefficients
         coeffs = []
         for i in range(len(channels)):
-            if channels[i][0].isnumeric()==True:
-                coeffs.append(channels[i][0:3])
-                channels[i]=channels[i][4:] # strip coeffs from channel list
+            if channels[i][0].isnumeric()==True: # if there is a coefficient in front e.g. 2.0*v_1
+                
+                # extract coefficient 
+                # 1. find where period is
+                IND = [ind for ind in range(len(channels[i])) if channels[i][ind]=='.']
+                LOC = IND[0]
+
+                # 2. Append full number with one decimal place to coefficient list
+                coeffs.append(channels[i][0:LOC+2])
+
+                # 3. strip coeffs from channel list
+                channels[i]=channels[i][LOC+3:]  
             else:
                 coeffs.append('1.0')
 

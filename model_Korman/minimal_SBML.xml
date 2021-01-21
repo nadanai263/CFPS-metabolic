@@ -5,14 +5,17 @@
       <compartment sboTerm="SBO:0000410" id="default_compartment" spatialDimensions="3" size="1" constant="true"/>
     </listOfCompartments>
     <listOfSpecies>
-      <species id="atp" compartment="default_compartment" initialAmount="4" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="atp" compartment="default_compartment" initialAmount="2" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
       <species id="adp" compartment="default_compartment" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
       <species id="nad" compartment="default_compartment" initialAmount="0.25" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
       <species id="nadh" compartment="default_compartment" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
       <species id="ppi" compartment="default_compartment" initialAmount="25" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
       <species id="pppi" compartment="default_compartment" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
-      <species id="pep" compartment="default_compartment" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="pep" compartment="default_compartment" initialAmount="33" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
       <species id="pyr" compartment="default_compartment" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="m" compartment="default_compartment" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="P" compartment="default_compartment" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Pmat" compartment="default_compartment" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
     </listOfSpecies>
     <listOfParameters>
       <parameter id="VmaxPyk" value="1" constant="true"/>
@@ -27,6 +30,14 @@
       <parameter id="Kppi22" value="0.1" constant="true"/>
       <parameter id="VmaxNoxe" value="1" constant="true"/>
       <parameter id="Knadh23" value="0.1" constant="true"/>
+      <parameter id="Vmaxtx" value="2e-05" constant="true"/>
+      <parameter id="d" value="1e-06" constant="true"/>
+      <parameter id="KTX" value="1e-05" constant="true"/>
+      <parameter id="Katp" value="1" constant="true"/>
+      <parameter id="kdeg" value="0.0001" constant="true"/>
+      <parameter id="Vmaxtl" value="2e-06" constant="true"/>
+      <parameter id="KTL" value="0.0001" constant="true"/>
+      <parameter id="kmat" value="0.0005" constant="true"/>
       <parameter id="Vmax" value="1" constant="true"/>
     </listOfParameters>
     <listOfReactions>
@@ -228,20 +239,131 @@
           </math>
         </kineticLaw>
       </reaction>
-      <reaction id="_J24" reversible="true" fast="false">
+      <reaction id="_Jdegpep" reversible="true" fast="false">
         <listOfReactants>
-          <speciesReference species="atp" stoichiometry="1" constant="true"/>
+          <speciesReference species="pep" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <listOfProducts>
-          <speciesReference species="adp" stoichiometry="1" constant="true"/>
           <speciesReference species="ppi" stoichiometry="1" constant="true"/>
         </listOfProducts>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply>
               <times/>
-              <ci> Vmax </ci>
-              <ci> atp </ci>
+              <cn> 0.001 </cn>
+              <ci> pep </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_JTX" reversible="true" fast="false">
+        <listOfReactants>
+          <speciesReference species="atp" stoichiometry="170" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="adp" stoichiometry="170" constant="true"/>
+          <speciesReference species="ppi" stoichiometry="170" constant="true"/>
+          <speciesReference species="m" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <divide/>
+              <apply>
+                <times/>
+                <apply>
+                  <divide/>
+                  <apply>
+                    <times/>
+                    <ci> Vmaxtx </ci>
+                    <ci> d </ci>
+                  </apply>
+                  <apply>
+                    <plus/>
+                    <ci> d </ci>
+                    <ci> KTX </ci>
+                  </apply>
+                </apply>
+                <ci> atp </ci>
+              </apply>
+              <apply>
+                <plus/>
+                <ci> atp </ci>
+                <ci> Katp </ci>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_Jdeg" reversible="true" fast="false">
+        <listOfReactants>
+          <speciesReference species="m" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> kdeg </ci>
+              <ci> m </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_JTL" reversible="true" fast="false">
+        <listOfReactants>
+          <speciesReference species="atp" stoichiometry="904" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="adp" stoichiometry="904" constant="true"/>
+          <speciesReference species="ppi" stoichiometry="904" constant="true"/>
+          <speciesReference species="P" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="m"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <divide/>
+              <apply>
+                <times/>
+                <apply>
+                  <divide/>
+                  <apply>
+                    <times/>
+                    <ci> Vmaxtl </ci>
+                    <ci> m </ci>
+                  </apply>
+                  <apply>
+                    <plus/>
+                    <ci> m </ci>
+                    <ci> KTL </ci>
+                  </apply>
+                </apply>
+                <ci> atp </ci>
+              </apply>
+              <apply>
+                <plus/>
+                <ci> atp </ci>
+                <ci> Katp </ci>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="_JMat" reversible="true" fast="false">
+        <listOfReactants>
+          <speciesReference species="P" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Pmat" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> kmat </ci>
+              <ci> P </ci>
             </apply>
           </math>
         </kineticLaw>
