@@ -1,7 +1,9 @@
 # 2020 Nadanai Laohakunakorn
 # Adapted from tellurium.py
+# 28/1/21 put all channels in brackets
 # 21/1/21 updated to include coefficients with greater than one significant digit
 # but stoichiometric coeffs cannot have more than one decimal place.
+
 
 from __future__ import print_function, division, absolute_import
 
@@ -292,7 +294,7 @@ def parseODEs(r,odes):
         #print(signs) # print to debug
         #print(coeffs) # print to debug
 
-        derivatives.append(' '.join([signs[j]+' '+coeffs[j]+' * '+channeldict[channels[j]] for j in range(len(channels))]))
+        derivatives.append(' '.join([signs[j]+' '+coeffs[j]+' * '+'('+channeldict[channels[j]]+')' for j in range(len(channels))]))
 
     speciesValues = r.getFloatingSpeciesConcentrations()
     parameterIds = r.getGlobalParameterIds()
