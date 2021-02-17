@@ -1,5 +1,6 @@
 # 2020 Nadanai Laohakunakorn
 # Adapted from tellurium.py
+# 17/2/21 added handling of exp and log functions for python outputs
 # 28/1/21 put all channels in brackets
 # 21/1/21 updated to include coefficients with greater than one significant digit
 # but stoichiometric coeffs cannot have more than one decimal place.
@@ -315,6 +316,8 @@ def writePython(speciesIds,speciesValues,parameterIds,parameterValues,derivative
 
         # Imports
         file.writelines('import numpy as np\n')
+        file.writelines('from numpy import exp as exp\n')
+        file.writelines('from numpy import log as log\n')
         file.writelines('\n')
 
         # Model definition

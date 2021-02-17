@@ -11,11 +11,11 @@ here = os.getcwd() # Use this if running locally.
 
 PATH_TO_MODELS = here+"/model_Korman/"
 PATH_TO_OUTPUT = here+"/modeloutput/" # Path for output data, plots
-MODELNAME = "minimal"
-MODELPY = "minimal.py"
-MODELJU = "minimal.jl"
-MODELSBML = "minimal_SBML.xml"
-FILENAME = "minimal.csv" # Filename for output data
+MODELNAME = "autocatalytic"
+MODELPY = "autocatalytic.py"
+MODELJU = "autocatalytic.jl"
+MODELSBML = "autocatalytic_SBML.xml"
+FILENAME = "autocatalytic.csv" # Filename for output data
 
 # Generate ODEs 
 r = te.loada(PATH_TO_MODELS+MODELNAME) # from Antimony file

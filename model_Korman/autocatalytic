@@ -1,0 +1,41 @@
+// libAntimony v2.9.4
+// Compartments and Species:
+species  A,B,M
+
+// Reactions:
+ 
+_J1: A -> B+M; kcat1*E*(A/Ka)/(1+A/Ka+(B/Kb)*(M/Km))*(1-exp(dG0/(R*T)+ln((B*M)/A)));
+_J2: B+M -> R+W+E; kcat2*R*(B/Kb)*(M/Km)/(1+(B/Kb)*(M/Km)+(R/Kr)*(W/Kw)*(E/Ke))*(1-exp(dG1/(R*T)+ln((R*W*E)/(B*M))));
+_J3: R -> W; kdeg*R;
+_J4: E -> W; kdeg*E;
+
+
+// Species initializations
+// in mM
+A = 50;
+B = 0.1;
+M = 0.1;
+E = 0.05; 
+R = 0.05;
+W = 0.1;
+
+// Parameter initializations:
+
+R = 8.3145;
+T = 298;
+
+// R1
+kcat1 = 10; // 1/s
+Ka = 0.1; // mM
+Kb = 0.1; // mM
+Km = 0.1; // mM
+dG0 = -1000; // kJ/mol
+
+// R2
+kcat2 = 10; // 1/s
+Kr = 0.1; // mM
+Kw = 0.1; // mM
+Ke = 0.1; // mM
+dG1 = -1000; // kJ/mol
+
+kdeg = 0.1; // 1/s
