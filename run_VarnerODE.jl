@@ -17,6 +17,10 @@ PATH_NET = pwd()*"/model/network/Network.dat"
 PATH_PARAMS = pwd()*"/model/params"
 FN = "CAT_timeseries.pdf" # Output filename
 
+# Important: select which parameter sets to solve with
+#PARAMS_TO_SOLVE = collect(1:100) # all parameter sets
+PARAMS_TO_SOLVE = [101] # best fit parameter set
+
 Plots.pyplot()
 fntsm = Plots.font("sans-serif", pointsize=round(10.0))
 fntlg = Plots.font("sans-serif", pointsize=round(12.0))
@@ -60,22 +64,24 @@ end
 
 # Ready to solve
 # 2. Solve ODEs, plot and save results
+# selected parameter sets defined at top of script
 
 p = plot(legend=:false,xaxis="Time (h)",yaxis="CAT (μM)")
-for idx in ProgressBar(1:100)
+for idx in PARAMS_TO_SOLVE
+    @info "Solving $(idx)"
     # Set simulation timespan and initial conditions
     tspan = (TSTART,TSTOP);
     initial_condition_vector = PARAMDICT[idx]["INITIAL_CONDITION_ARRAY"];
     # Use sundials to solve fluxes.
     prob = ODEProblem(MassBalances,initial_condition_vector,tspan,PARAMDICT[idx]);
-    sol = solve(prob,CVODE_BDF(),abstol=1e-9,reltol=1e-9);
+    sol = solve(prob,CVODE_BDF(),abstol=1e-12,reltol=1e-12); # very small tolerances required
     df = DataFrame(sol);  # df is 352 rows x 2508 columns
-    #CSV.write(string(PATH_OUT,"solution.csv"), df)
+    #CSV.write(string(PATH_OUT,"solution.csv"), df) # uncomment if you want to save
 
     # make arrays and plot
     t=sol.t
     x=Array(df[98,:])
-    plot!(t,x,alpha=0.7,color="skyblue1")
+    plot!(t,x*1000,alpha=0.7,color="skyblue1")
 end
 
 savefig(PATH_OUT*FN) # Save plot
