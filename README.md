@@ -1,5 +1,5 @@
 # CFPS-metabolic
-Implementation of Horvath et al. 2020 cell-free metabolic model. Original code [here](https://github.com/varnerlab/Kinetic-CFPS-Model-Publication-Code) and original paper [here](https://www.sciencedirect.com/science/article/pii/S2214030118300452). Tested on Julia 1.4.
+Implementation of Horvath et al. 2020 cell-free metabolic model. Original code [here](https://github.com/varnerlab/Kinetic-CFPS-Model-Publication-Code) and original paper [here](https://www.sciencedirect.com/science/article/pii/S2214030118300452). Tested on Julia 1.7.
 
 ## Usage
 With a working local installation of Julia, start up the REPL by running `julia` on the command line. Use the following two commands to call up the package manager and activating the environment: `]` `activate .` Exit the package manager by pressing Backspace, and then run the model by calling `include("run_VarnerODE.jl")`. This solves the model for the best fit parameter set; a specific parameter set (or multiple sets) can be selected in the script. 

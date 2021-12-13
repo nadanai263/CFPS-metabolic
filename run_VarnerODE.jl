@@ -68,7 +68,6 @@ end
 
 p = plot(legend=:false,xaxis="Time (h)",yaxis="CAT (μM)")
 for idx in PARAMS_TO_SOLVE
-    @info "Solving $(idx)"
     # Set simulation timespan and initial conditions
     tspan = (TSTART,TSTOP);
     initial_condition_vector = PARAMDICT[idx]["INITIAL_CONDITION_ARRAY"];
@@ -80,9 +79,8 @@ for idx in PARAMS_TO_SOLVE
 
     # make arrays and plot
     t=sol.t
-    x=Array(df[98,:])
+    x=sol[98,:] # select CAT concentration
     plot!(t,x*1000,alpha=0.7,color="skyblue1")
 end
 
 savefig(PATH_OUT*FN) # Save plot
-p # Show plot
